@@ -1,6 +1,6 @@
 import allure
 
-from locators import ProfilePageLocators, LoginPageLocators
+from locators import ProfilePageLocators
 from pages.base_page import BasePage
 
 
@@ -16,7 +16,7 @@ class ProfilePage(BasePage):
 
     @allure.step('Нажать "История заказов" для просмотра списка заказов')
     def click_history_of_orders_view_list(self):
-        self.wait_modal()
+        self.wait_element_invisibility()
         self.click_element(self.locator.history_of_orders)
         self.wait_page_transition(self.locator.first_order_id)
 
@@ -27,4 +27,3 @@ class ProfilePage(BasePage):
     @allure.step('Нажать "Выход"')
     def click_logout(self):
         self.click_element(self.locator.logout)
-        self.wait_page_transition(LoginPageLocators.login_button)

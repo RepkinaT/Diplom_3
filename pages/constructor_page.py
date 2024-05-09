@@ -19,7 +19,7 @@ class ConstructorPage(BasePage):
 
     @allure.step('Закрыть окно')
     def close_a_window(self):
-        self.wait_modal()
+        self.wait_element_invisibility()
         self.wait_element_visibility(self.locator.close_a_window)
         self.click_element(self.locator.close_a_window)
 
@@ -46,11 +46,11 @@ class ConstructorPage(BasePage):
 
     @allure.step("Получаем номер своего заказа")
     def get_number_order(self):
-        self.wait_modal()
+        self.wait_element_invisibility()
         return self.get_text_element(self.locator.number_order)
 
     @allure.step('Закрываем модальное окно созданного заказа')
     def click_close_modal_button(self):
         self.wait_element_visibility(self.locator.order_modal_opened)
-        self.wait_disappear_element(self.locator.order_modal_opened)
+        self.wait_element_invisibility(self.locator.order_modal_opened)
         self.click_element(self.locator.close_modal_button)

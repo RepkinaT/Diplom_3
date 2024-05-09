@@ -1,6 +1,6 @@
 import allure
 
-from locators import HeaderLocators, OrdersFeedPageLocators
+from locators import HeaderLocators
 from pages.base_page import BasePage
 
 
@@ -12,7 +12,6 @@ class Header(BasePage):
     @allure.step('Нажать "Лента заказов"')
     def click_order_feed(self):
         self.click_element(self.locator.order_feed)
-        self.wait_page_transition(OrdersFeedPageLocators.first_order)
 
     @allure.step('Нажать "Конструктор"')
     def click_constructor(self):

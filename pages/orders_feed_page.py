@@ -11,6 +11,7 @@ class OrdersFeedPage(BasePage):
 
     @allure.step('Нажать на первый заказ в ленте')
     def click_history_of_orders(self):
+        self.wait_page_transition(self.locator.first_order)
         self.click_element(self.locator.first_order)
 
     @allure.step('Получить "Состав" из модального окна')

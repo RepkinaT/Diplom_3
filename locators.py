@@ -63,6 +63,7 @@ class ProfilePageLocators:
 class ForgotPasswordLocators:
     email_input = By.XPATH, './/input[@name="name"]'
     restore_button = By.XPATH, './/button[text()="Восстановить"]'
+    save_button = By.XPATH, './/button[text()="Сохранить"]'
 
 
 class ResetPasswordLocators:

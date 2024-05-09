@@ -1,6 +1,6 @@
 import allure
 
-from locators import LoginPageLocators, ConstructorPageLocators
+from locators import LoginPageLocators
 from pages.base_page import BasePage
 
 
@@ -20,7 +20,7 @@ class LoginPage(BasePage):
     @allure.step('Нажать "Войти"')
     def click_login_button(self):
         self.click_element(self.locator.login_button)
-        self.wait_page_transition(ConstructorPageLocators.first_bun)
+        self.wait_page_transition(self.locator.login_button)
 
     @allure.step('Нажать "Восстановить пароль"')
     def click_restore_password(self):
@@ -28,6 +28,11 @@ class LoginPage(BasePage):
 
     @allure.step('Авторизация пользователя')
     def authorization_user(self, email, password):
+        self.wait_page_transition(self.locator.login_button)
         self.enter_email(email)
         self.enter_password(password)
         self.click_login_button()
+
+    @allure.step('Ожидаем выход с аккаунта')
+    def wait_logout(self):
+        self.wait_page_transition(self.locator.login_button)

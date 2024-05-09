@@ -1,6 +1,6 @@
 import allure
 
-from locators import LocatorRegistration, LoginPageLocators
+from locators import LocatorRegistration
 from pages.base_page import BasePage
 from urls import register_url
 
@@ -25,7 +25,6 @@ class RegistrationPage(BasePage):
     @allure.step('Нажать "Зарегистрироваться"')
     def click_login_button(self):
         self.click_element(self.locator.submit_button)
-        self.wait_page_transition(LoginPageLocators.login_button)
 
     @allure.step('Регистрация пользователя')
     def registration_user(self, name, email, password):
