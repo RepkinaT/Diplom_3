@@ -1,0 +1,8 @@
+main_url = 'https://stellarburgers.nomoreparties.site/'
+register_url = main_url + 'register'
+login_url = main_url + 'login'
+forgot_url = main_url + 'forgot-password'
+del_user_url = main_url + 'api/auth/user'
+history_url = main_url + 'account/order-history'
+profile_url = main_url + 'account/profile'
+order_feed_url = main_url + 'feed'
