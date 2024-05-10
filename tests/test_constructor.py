@@ -1,5 +1,6 @@
 import allure
 
+from helpers import RandomData
 from pages.constructor_page import ConstructorPage
 from pages.header import Header
 from pages.login_page import LoginPage
@@ -16,7 +17,7 @@ class TestMainPage:
         page.click_order_feed()
         page.click_constructor()
 
-        assert driver.current_url == main_url
+        assert page.get_current_url == main_url
 
     @allure.title('Тест перехода на страницу История заказов')
     @allure.description('Нажимаем на "История заказов" в меню с главной страницы')
@@ -24,7 +25,7 @@ class TestMainPage:
         page = Header(driver)
         page.click_order_feed()
 
-        assert driver.current_url == order_feed_url
+        assert page.get_current_url == order_feed_url
 
     @allure.title('Тест открытия всплывающего окна с ингредиентами')
     @allure.description('Нажимаем на булку, чтобы посмотреть детали ингредиента')
@@ -54,13 +55,14 @@ class TestMainPage:
 
     @allure.title('Тест создания заказа авторизованным пользователем')
     @allure.description("Проходим регистрацию и создаем заказ, проверяем по тексту 'идентификатор заказа'")
-    def test_create_order_authorized_user(self, driver, generate_random_name, generate_random_email,
-                                          generate_random_password):
+    def test_create_order_authorized_user(self, driver):
+        name = RandomData.generate_random_name()
+        email = RandomData.generate_random_email()
+        password = RandomData.generate_random_password()
         register_page = RegistrationPage(driver)
-        register_page.registration_user(generate_random_name, generate_random_email,
-                                        generate_random_password)
+        register_page.registration_user(name, email, password)
         login_page = LoginPage(driver)
-        login_page.authorization_user(generate_random_email, generate_random_password)
+        login_page.authorization_user(email, password)
         Header(driver).click_constructor()
 
         page = ConstructorPage(driver)

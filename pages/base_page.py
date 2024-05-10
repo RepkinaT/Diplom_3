@@ -57,3 +57,7 @@ class BasePage:
         target = self.get_element(locator_target)
         action_chains = ActionChains(self.driver)
         action_chains.drag_and_drop(element, target).perform()
+
+    @allure.step('Получаем ссылку на текущую страницу')
+    def get_current_url(self):
+        return self.driver.current_url

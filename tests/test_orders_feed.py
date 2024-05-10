@@ -1,5 +1,6 @@
 import allure
 
+from helpers import RandomData
 from pages.constructor_page import ConstructorPage
 from pages.header import Header
 from pages.login_page import LoginPage
@@ -21,13 +22,15 @@ class TestOrdersFeedPage:
     @allure.title('Тест отображения заказа пользователя в Ленте заказов')
     @allure.description('Регистрируем пользователя, создаем заказ и '
                         'проверяем отображения заказа пользователя в Ленте заказов, должны найти его номер')
-    def test_check_user_order_in_the_feed(self, driver, generate_random_name, generate_random_email,
-                                          generate_random_password):
+    def test_check_user_order_in_the_feed(self, driver):
+        name = RandomData.generate_random_name()
+        email = RandomData.generate_random_email()
+        password = RandomData.generate_random_password()
         register_page = RegistrationPage(driver)
-        register_page.registration_user(generate_random_name, generate_random_email,
-                                        generate_random_password)
+        register_page.registration_user(name, email, password)
         login_page = LoginPage(driver)
-        login_page.authorization_user(generate_random_email, generate_random_password)
+        login_page.authorization_user(email, password)
+
         header = Header(driver)
         header.click_constructor()
 
@@ -51,13 +54,14 @@ class TestOrdersFeedPage:
 
     @allure.title('Тест увеличения счетчика заказов за все время, если добавить новый заказ')
     @allure.description("Регистрируем пользователя, создаем заказ и проверяем увеличился ли счетчик за все время")
-    def test_increase_in_order_counter_for_all_time(self, driver, generate_random_name, generate_random_email,
-                                                    generate_random_password):
+    def test_increase_in_order_counter_for_all_time(self, driver):
+        name = RandomData.generate_random_name()
+        email = RandomData.generate_random_email()
+        password = RandomData.generate_random_password()
         register_page = RegistrationPage(driver)
-        register_page.registration_user(generate_random_name, generate_random_email,
-                                        generate_random_password)
+        register_page.registration_user(name, email, password)
         login_page = LoginPage(driver)
-        login_page.authorization_user(generate_random_email, generate_random_password)
+        login_page.authorization_user(email, password)
 
         Header(driver).click_order_feed()
 
@@ -79,13 +83,14 @@ class TestOrdersFeedPage:
 
     @allure.title('Тест увеличения счетчика заказов за сегодня, если добавить новый заказ')
     @allure.description("Регистрируем пользователя, создаем заказ и проверяем увеличился ли счетчик за сегодня")
-    def test_increase_in_order_counter_for_today(self, driver, generate_random_name, generate_random_email,
-                                                 generate_random_password):
+    def test_increase_in_order_counter_for_today(self, driver):
+        name = RandomData.generate_random_name()
+        email = RandomData.generate_random_email()
+        password = RandomData.generate_random_password()
         register_page = RegistrationPage(driver)
-        register_page.registration_user(generate_random_name, generate_random_email,
-                                        generate_random_password)
+        register_page.registration_user(name, email, password)
         login_page = LoginPage(driver)
-        login_page.authorization_user(generate_random_email, generate_random_password)
+        login_page.authorization_user(email, password)
 
         Header(driver).click_order_feed()
 
@@ -107,13 +112,14 @@ class TestOrdersFeedPage:
 
     @allure.title('Тест появления нового заказа в разделе "В работе"')
     @allure.description("Регистрируем пользователя, создаем заказ и проверяем появления нового заказа в нужном разделе")
-    def test_check_the_new_order_in_work(self, driver, generate_random_name, generate_random_email,
-                                         generate_random_password):
+    def test_check_the_new_order_in_work(self, driver):
+        name = RandomData.generate_random_name()
+        email = RandomData.generate_random_email()
+        password = RandomData.generate_random_password()
         register_page = RegistrationPage(driver)
-        register_page.registration_user(generate_random_name, generate_random_email,
-                                        generate_random_password)
+        register_page.registration_user(name, email, password)
         login_page = LoginPage(driver)
-        login_page.authorization_user(generate_random_email, generate_random_password)
+        login_page.authorization_user(email, password)
 
         Header(driver).click_constructor()
 

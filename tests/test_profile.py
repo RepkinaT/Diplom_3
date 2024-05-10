@@ -1,5 +1,6 @@
 import allure
 
+from helpers import RandomData
 from locators import ProfilePageLocators, LoginPageLocators
 from pages.header import Header
 from pages.login_page import LoginPage
@@ -15,40 +16,41 @@ class TestProfilePage:
         page = Header(driver)
         page.click_profile(LoginPageLocators.login_button)
 
-        assert driver.current_url == login_url
+        assert page.get_current_url == login_url
 
     @allure.title('Тест перехода на страницу История заказов')
     @allure.description('Нажимаем на "История заказов" с главной страницы')
-    def test_transition_history_order(self, driver, generate_random_name, generate_random_email,
-                                      generate_random_password):
+    def test_transition_history_order(self, driver):
         header = Header(driver)
-        register_page = RegistrationPage(driver)
-        register_page.registration_user(generate_random_name, generate_random_email,
-                                        generate_random_password)
 
+        name = RandomData.generate_random_name()
+        email = RandomData.generate_random_email()
+        password = RandomData.generate_random_password()
+        register_page = RegistrationPage(driver)
+        register_page.registration_user(name, email, password)
         login_page = LoginPage(driver)
-        login_page.authorization_user(generate_random_email, generate_random_password)
+        login_page.authorization_user(email, password)
 
         profile_page = ProfilePage(driver)
         header.click_profile(ProfilePageLocators.logout)
         profile_page.click_history_of_orders()
-        assert driver.current_url == history_url
+        assert profile_page.get_current_url == history_url
 
     @allure.title('Тест выхода из аккаунта')
     @allure.description('Нажимаем на "Личный кабинет" регистрируемся и выходим из аккаунта')
-    def test_logout_profile(self, driver, generate_random_name, generate_random_email,
-                            generate_random_password):
+    def test_logout_profile(self, driver):
         header = Header(driver)
+        name = RandomData.generate_random_name()
+        email = RandomData.generate_random_email()
+        password = RandomData.generate_random_password()
         register_page = RegistrationPage(driver)
-        register_page.registration_user(generate_random_name, generate_random_email,
-                                        generate_random_password)
-
+        register_page.registration_user(name, email, password)
         login_page = LoginPage(driver)
-        login_page.authorization_user(generate_random_email, generate_random_password)
+        login_page.authorization_user(email, password)
 
         profile_page = ProfilePage(driver)
         header.click_profile(ProfilePageLocators.logout)
         profile_page.click_logout()
         login_page.wait_logout()
 
-        assert driver.current_url == login_url
+        assert profile_page.get_current_url == login_url
